@@ -104,15 +104,4 @@ def Onepiece_detail(request, pk):
 
 
 class SearchFormView(FormView):
-    form_class = forms.SearchForm
-    template_name = "clothes/search.html"
-
-    def form_valid(self, form):
-        word = "%s" % self.request.GET["word"]
-        clothes_list = models.Upper.filter(
-            Q(title__icontains=word) | Q(content__icontains=word)
-        ).distinct()
-        context = {}
-        context["object_list"] = clothes_list
-        context["search_word"] = word
-        return context
+    pass

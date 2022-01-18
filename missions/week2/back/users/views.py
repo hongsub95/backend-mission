@@ -1,3 +1,5 @@
+import os
+import requests
 from django.shortcuts import redirect, reverse
 from django.urls import reverse_lazy
 from django.views.generic import FormView
@@ -38,3 +40,28 @@ class SignUpView(FormView):
         if user is not None:
             login(self.request, user)
         return super().form_valid(form)
+
+
+def kakao_login(request):
+    REST_API_KEY = os.environ.get("K_KEY")
+    REDIRECT_URI = "http://127.0.0.1:8000/users/login/kakao/callback"
+    return redirect(
+        f"https://kauth.kakao.com/oauth/authorize?response_type=code&client_id={REST_API_KEY}&redirect_uri={REDIRECT_URI}"
+    )
+
+
+class KakaoException(Exception):
+    pass
+
+
+def kakao_callback(request):
+    try:
+        AUTHORIZE_CODE = request.GET.get("code")
+        REST_API_KEY = os.environ.get("K_KEY")
+        REDIRECT_URI = "http://127.0.0.1:8000/users/login/kakao/callback"
+        token_request = requests.get(
+            f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={REST_API_KEY}&redirect_uri={REDIRECT_URI}&code={AUTHORIZE_CODE}"
+        )
+        print(token_request.json())
+    except KakaoException:
+        return redirect(reverse("users:login"))

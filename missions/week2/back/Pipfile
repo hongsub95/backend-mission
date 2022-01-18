@@ -9,6 +9,9 @@ django-bootstrap-v5 = "*"
 django-debug-toolbar = "*"
 Django = "*"
 Pillow = "*"
+django-environ = "*"
+django-dotenv = "*"
+requests = "*"
 
 [dev-packages]
 flake8 = "*"
