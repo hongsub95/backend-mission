@@ -11,6 +11,16 @@ class User(AbstractUser):
         (GENDER_FEMALE, "Female"),
         (GENDER_OTHER, "Other"),
     ]
+    LOGIN_EMAIL = "email"
+    LOGIN_KAKAO = "kakao"
+
+    LOGIN_CHOICES = (
+        (LOGIN_EMAIL, "Email"),
+        (LOGIN_KAKAO, "Kakao"),
+    )
+    login_method = models.CharField(
+        max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
+    )
     avatar = models.ImageField(blank=True, upload_to="avatar", verbose_name="프로필 사진")
     gender = models.CharField(
         max_length=10, null=True, blank=True, choices=GENDER_CHOICES, verbose_name="성별"

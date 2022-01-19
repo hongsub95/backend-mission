@@ -5,7 +5,8 @@
 {%endblock page_title%}
 
 {% block content %}
-    <a href = "{% url 'users:kakao-login' %}">카카오톡 인증</a>
+
+    <a href = "{% url 'users:kakao-login' %}">카카오톡으로 회원가입</a>
     <form method="POST" action = "{% url 'users:signup' %}">
         {% csrf_token %}
         {{form.as_p}}

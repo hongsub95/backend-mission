@@ -12,6 +12,7 @@ Pillow = "*"
 django-environ = "*"
 django-dotenv = "*"
 requests = "*"
+django-fontawesome-5 = "*"
 
 [dev-packages]
 flake8 = "*"

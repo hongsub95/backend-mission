@@ -4,7 +4,7 @@ from django.shortcuts import redirect, reverse
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 from django.contrib.auth import authenticate, login, logout
-from . import forms
+from . import forms, models
 
 
 class LoginView(FormView):
@@ -62,6 +62,33 @@ def kakao_callback(request):
         token_request = requests.get(
             f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={REST_API_KEY}&redirect_uri={REDIRECT_URI}&code={AUTHORIZE_CODE}"
         )
-        print(token_request.json())
+        token_json = token_request.json()
+        error = token_json.get("error")
+        if error is not None:
+            raise KakaoException()
+        ACCESS_TOKEN = token_json.get("access_token")
+        profile_request = requests.get(
+            "https://kapi.kakao.com/v2/user/me",
+            headers={"Authorization": f"Bearer {ACCESS_TOKEN}"},
+        )
+        profile_json = profile_request.json()
+        k_account = profile_json.get("kakao_account")
+        email = k_account.get("email", None)
+        if email is None:
+            raise KakaoException()
+        nickname = k_account.get("profile").get("nickname")
+        profile_image = k_account.get("profile").get("profile_image_url")
+        try:
+            user = models.User.objects.get(email=email)
+            if user.login_method == models.User.LOGIN_KAKAO:
+                raise KakaoException()
+        except models.User.DoesNotExist:
+            user = models.User.objects.create(
+                email=email, first_name=nickname, login_method=models.User.LOGIN_KAKAO
+            )
+            user.set_unusable_password()
+            user.save()
+        login(request, user)
+        return redirect(reverse("core:home"))
     except KakaoException:
         return redirect(reverse("users:login"))

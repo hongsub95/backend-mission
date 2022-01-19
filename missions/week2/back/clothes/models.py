@@ -51,6 +51,7 @@ class clothes(core_models.TimeStampedModel):
     name = models.CharField(max_length=100, verbose_name="상품명")
     description = models.TextField(null=True, blank=True)
     price = models.IntegerField(verbose_name="가격")
+    quantity = models.IntegerField(verbose_name="수량")
 
     class Meta:
         abstract = True
