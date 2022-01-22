@@ -26,7 +26,10 @@ SECRET_KEY = "django-insecure-k80k+(3*eta3wy&a@l^9)okl0&u85wyrgo7ga*!+ttgcl4m23$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "www.example.com"]
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+]
 
 
 # Application definition
@@ -44,8 +47,8 @@ PROJECT_APPS = [
     "users.apps.UsersConfig",
     "core.apps.CoreConfig",
     "clothes.apps.ClothesConfig",
+    "markets.apps.MarketsConfig",
     "options.apps.OptionsConfig",
-    "lists.apps.ListsConfig",
 ]
 
 THIRD_APPS = [

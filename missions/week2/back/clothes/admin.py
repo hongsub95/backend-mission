@@ -3,22 +3,14 @@ from . import models
 from django.utils.safestring import mark_safe
 
 
-class upper_photo(admin.TabularInline):
-    model = models.Uppers_photo
+class clothes_photo(admin.TabularInline):
+    model = models.photo
 
 
-class outer_photo(admin.TabularInline):
-    model = models.Outers_photo
-
-
-class onepiece_photo(admin.TabularInline):
-    model = models.Onepieces_photo
-
-
-@admin.register(models.Uppers_photo, models.Outers_photo, models.Onepieces_photo)
+@admin.register(models.photo)
 class PhotoAdmin(admin.ModelAdmin):
     list_display = (
-        "clothes",
+        "product",
         "get_thumbnail",
     )
 
@@ -28,8 +20,13 @@ class PhotoAdmin(admin.ModelAdmin):
     get_thumbnail.short_description = "썸네일"
 
 
-@admin.register(models.Upper)
-class UpperAdmin(admin.ModelAdmin):
+@admin.register(models.Categories)
+class CateAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+
+
+@admin.register(models.Clothes)
+class ClothesAdmin(admin.ModelAdmin):
     fieldsets = (
         (
             "Clothes Info",
@@ -37,25 +34,29 @@ class UpperAdmin(admin.ModelAdmin):
                 "fields": (
                     "name",
                     "description",
+                    "category",
+                    "stock",
                     "colors",
                     "price",
-                    "size_upper",
+                    "size",
+                    "market",
                     "host",
                 ),
             },
         ),
     )
-    filter_horizontal = ("size_upper", "colors")
+    filter_horizontal = ("size", "colors")
     list_display = (
         "name",
         "color",
         "price",
+        "category",
         "host",
     )
     search_fields = ("name", "colors")
-    raw_id_fields = ("host",)
+    raw_id_fields = ("host", "market")
     inlines = [
-        upper_photo,
+        clothes_photo,
     ]
 
     def color(self, obj):
@@ -66,137 +67,3 @@ class UpperAdmin(admin.ModelAdmin):
         return color_list if len(color_list) < 5 else color_list[:5]
 
     color.short_description = "색상"
-
-
-@admin.register(models.Outers)
-class OutersAdmin(admin.ModelAdmin):
-    fieldsets = (
-        (
-            "Clothes Info",
-            {
-                "fields": (
-                    "name",
-                    "description",
-                    "colors",
-                    "price",
-                    "size_outer",
-                    "host",
-                ),
-            },
-        ),
-    )
-    filter_horizontal = ("size_outer", "colors")
-    list_display = (
-        "name",
-        "color",
-        "price",
-        "host",
-    )
-    search_fields = ("name", "colors")
-    raw_id_fields = ("host",)
-    inlines = [
-        outer_photo,
-    ]
-
-    def color(self, obj):
-        c = obj.colors.all()
-        color_list = []
-        for co in c:
-            color_list.append(co)
-        return color_list if len(color_list) < 5 else color_list[:5]
-
-    color.short_description = "색상"
-
-
-@admin.register(models.Onepieces)
-class OnepiecesAdmin(admin.ModelAdmin):
-    fieldsets = (
-        (
-            "Clothes Info",
-            {
-                "fields": (
-                    "name",
-                    "description",
-                    "colors",
-                    "price",
-                    "size_onepiece",
-                    "host",
-                ),
-            },
-        ),
-    )
-    filter_horizontal = ("size_onepiece", "colors")
-    list_display = (
-        "name",
-        "color",
-        "price",
-        "host",
-    )
-    search_fields = ("name", "colors")
-    raw_id_fields = ("host",)
-    inlines = [
-        onepiece_photo,
-    ]
-
-    def color(self, obj):
-        c = obj.colors.all()
-        color_list = []
-        for co in c:
-            color_list.append(co)
-        return color_list if len(color_list) < 5 else color_list[:5]
-
-    color.short_description = "색상"
-
-
-@admin.register(models.Upper_comment)
-class UpperCommentAdmin(admin.ModelAdmin):
-    fieldsets = (
-        (
-            "Clothes Info",
-            {
-                "fields": (
-                    "upper",
-                    "content",
-                    "Author",
-                ),
-            },
-        ),
-    )
-    list_display = ("Author", "content", "created")
-    raw_id_fields = ("Author",)
-
-
-@admin.register(models.Outer_comment)
-class OuterCommentAdmin(admin.ModelAdmin):
-    fieldsets = (
-        (
-            "Clothes Info",
-            {
-                "fields": (
-                    "outer",
-                    "content",
-                    "Author",
-                ),
-            },
-        ),
-    )
-    list_display = ("Author", "content", "created")
-    raw_id_fields = ("Author",)
-
-
-@admin.register(models.Onepiece_comment)
-class OnepieceCommentAdmin(admin.ModelAdmin):
-    fieldsets = (
-        (
-            "Clothes Info",
-            {
-                "fields": (
-                    "onepiece",
-                    "content",
-                    "Author",
-                ),
-            },
-        ),
-    )
-    list_display = ("Author", "content", "created")
-    raw_id_fields = ("Author",)

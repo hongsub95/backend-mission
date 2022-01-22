@@ -7,7 +7,7 @@ urlpatterns = [
     path("", include("core.urls", namespace="core")),
     path("clothes/", include("clothes.urls", namespace="clothes")),
     path("users/", include("users.urls", namespace="users")),
-    path("admin/", admin.site.urls),
+    path("admin", admin.site.urls),
 ]
 
 

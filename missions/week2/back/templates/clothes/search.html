@@ -8,17 +8,24 @@
 
 {% block content %}
     <h2>검색!</h2>
-    <form method="GET" action="{% url 'clothes:search' %}">
-        {{form.as_p}}
-        <button>검색</button>
-    </form>
-    {% if object_list %}
-        {% for clothes in clothes_list %}
-            {{clothes.title}}
-        {% endfor %}
-    {% elif search_word %}
-        {{search_word}}가 없습니다
-    {% endif %}
+    <form method="GET" action="{% url 'search' %}">
+        <div>
+        {% if search.has_previous %}
+            <a href="?page={{search.previous_page_number}}">이전</a> 
+        {% endif %}
+            
+        Page {{search.number}} / {{search.paginator.num_pages}}
+            
+        {% if search.has_next %}
+            <a href ="?page={{search.next_page_number}}">다음</a>
+        {% endif %}
+        </div>
+      
+        <div id="search">
+          <input name="search" type="text">
+          <button class="btn btn-primary" type="submit">검색</button>
+        </div>
+        </form>
 {% endblock content %}
 
 

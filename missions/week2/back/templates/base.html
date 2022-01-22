@@ -1,32 +1,26 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block page_name %}{% endblock page_name %}</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-    <link rel="stylesheet" href='{% static 'tailwind.output.css' %}'>
-    <link rel="stylesheet" href='{% static 'common.css' %}'>
-</head>
-<body class="t-text-gray-900 t-w-full t-font-light t-text-3xl">
-    <header class="t-container t-max-w-full t-inset-0 t-flex t-items-center t-justify-between t-px-3 t-h-20 t-border-b t-border-gray-500 t-fixed t-bg-white">
-        {% include "partials/nav.html" %}
-        {% block search-bar %}
-            <form method="get" action='{% url 'clothes:search' %}'>
-                <button>원하는 옷 검색</button>
-            </form>
-        {% endblock search-bar %}
-    </header>
-    
-    {% block content %}
-    {% endblock content %}
-    
-    <footer class="t-container t-max-w-full t-mx-auto t-text-center t-pt-10 t-border-t t-border-gray-800 t-font-medium t-text-gray-700">
-        <div class="t-flex t-flex-col">
-            <span> &copy; HSub </span>
-        </div>
-    </footer>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block page_name %}{% endblock page_name %}</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <link rel="stylesheet" href='{% static 'tailwind.output.css' %}'>
+        <link rel="stylesheet" href='{% static 'common.css' %}'>
+    </head>
+    <body>
+        <header class="t-container t-max-w-full t-inset-0 t-flex t-items-center t-justify-between t-px-3 t-h-20 t-border-b t-border-gray-500 t-fixed t-bg-white">
+            {% include "partials/nav.html" %}
+            {% block search-bar %}
+                <form method="get" action='{% url 'clothes:search' %}' class="w-9/12">
+                    <button>원하는 옷 검색</button>
+                </form>
+            {% endblock search-bar %}
+        </header>
+        
+        {% block content %}{% endblock content %}
+
+    </body>
 </html>

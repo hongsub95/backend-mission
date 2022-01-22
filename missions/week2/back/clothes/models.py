@@ -1,171 +1,61 @@
+from tabnanny import verbose
 from django.db import models
 from core import models as core_models
 
 
-class Uppers_photo(core_models.TimeStampedModel):
-
-    clothes = models.ForeignKey(
-        "Upper",
-        related_name="upper_photos",
-        on_delete=models.CASCADE,
-        verbose_name="상품명",
+class photo(core_models.TimeStampedModel):
+    name = models.CharField(max_length=30)
+    file = models.ImageField(upload_to="product")
+    product = models.ForeignKey(
+        "Clothes", related_name="photo", on_delete=models.CASCADE
     )
 
-    file = models.ImageField(upload_to="upper")
+    class Meta:
+        verbose_name_plural = "상품 사진"
+
+
+class Categories(core_models.TimeStampedModel):
+    name = models.CharField(max_length=20, verbose_name="이름")
 
     class Meta:
-        verbose_name_plural = "상의사진"
+        verbose_name_plural = "카테고리"
+
+    def __str__(self):
+        return self.name
 
 
-class Outers_photo(core_models.TimeStampedModel):
-
-    clothes = models.ForeignKey(
-        "Outers",
-        related_name="outers_photos",
-        on_delete=models.CASCADE,
-        verbose_name="상품명",
-    )
-
-    file = models.ImageField(upload_to="outer")
-
-    class Meta:
-        verbose_name_plural = "아우터 사진"
-
-
-class Onepieces_photo(core_models.TimeStampedModel):
-
-    clothes = models.ForeignKey(
-        "Onepieces",
-        related_name="onepieces_photos",
-        on_delete=models.CASCADE,
-        verbose_name="상품명",
-    )
-
-    file = models.ImageField(upload_to="onepiece")
-
-    class Meta:
-        verbose_name_plural = "원피스 사진"
-
-
-class clothes(core_models.TimeStampedModel):
+class Clothes(core_models.TimeStampedModel):
     name = models.CharField(max_length=100, verbose_name="상품명")
-    description = models.TextField(null=True, blank=True)
+    description = models.TextField(verbose_name="설명")
     price = models.IntegerField(verbose_name="가격")
-    quantity = models.IntegerField(verbose_name="수량")
-
-    class Meta:
-        abstract = True
-
-
-class Upper(clothes):
-
-    host = models.ForeignKey(
-        "users.User", related_name="upper", on_delete=models.CASCADE
-    )
-
+    stock = models.IntegerField(verbose_name="재고")
     colors = models.ManyToManyField(
-        "options.Color", related_name="upper", verbose_name="색상", blank=True
+        "options.Color", related_name="clothes", blank=True, verbose_name="색상"
     )
-
-    size_upper = models.ManyToManyField(
-        "options.size_upper", related_name="upper", verbose_name="사이즈", blank=True
+    size = models.ManyToManyField(
+        "options.Size", related_name="clothes", blank=True, verbose_name="사이즈"
     )
-
-    def __str__(self) -> str:
-        return self.name
-
-    class Meta:
-        verbose_name_plural = "상의"
-
-
-class Outers(clothes):
-
+    category = models.ForeignKey(
+        "Categories",
+        related_name="clothes",
+        on_delete=models.DO_NOTHING,
+        verbose_name="카테고리",
+    )
+    market = models.ForeignKey(
+        "markets.Market",
+        related_name="clothes",
+        on_delete=models.CASCADE,
+        verbose_name="사이트",
+    )
     host = models.ForeignKey(
-        "users.User", related_name="outers", on_delete=models.CASCADE
+        "users.User",
+        related_name="clothes",
+        on_delete=models.CASCADE,
+        verbose_name="판매자",
     )
-
-    colors = models.ManyToManyField(
-        "options.Color", related_name="outers", verbose_name="색상", blank=True
-    )
-
-    size_outer = models.ManyToManyField(
-        "options.size_outer", related_name="outers", verbose_name="사이즈", blank=True
-    )
-
-    def __str__(self) -> str:
-        return self.name
 
     class Meta:
-        verbose_name_plural = "아우터"
-
-
-class Onepieces(clothes):
-
-    host = models.ForeignKey(
-        "users.User", related_name="onepieces", on_delete=models.CASCADE
-    )
-
-    colors = models.ManyToManyField(
-        "options.Color", related_name="onepieces", verbose_name="색상", blank=True
-    )
-
-    size_onepiece = models.ManyToManyField(
-        "options.size_onepiece",
-        related_name="onepieces",
-        verbose_name="사이즈",
-        blank=True,
-    )
-
-    def __str__(self) -> str:
-        return self.name
-
-    class Meta:
-        verbose_name_plural = "원피스"
-
-
-class Upper_comment(core_models.TimeStampedModel):
-    upper = models.ForeignKey(
-        Upper, related_name="upper_comments", on_delete=models.CASCADE
-    )
-    content = models.TextField()
-    Author = models.ForeignKey(
-        "users.User", related_name="upper_comments", on_delete=models.CASCADE
-    )
+        verbose_name_plural = "상품"
 
     def __str__(self):
-        return self.content
-
-    class Meta:
-        verbose_name_plural = "상의 질문"
-
-
-class Outer_comment(core_models.TimeStampedModel):
-    outer = models.ForeignKey(
-        Outers, related_name="outer_comments", on_delete=models.CASCADE
-    )
-    content = models.TextField()
-    Author = models.ForeignKey(
-        "users.User", related_name="outer_comments", on_delete=models.CASCADE
-    )
-
-    def __str__(self):
-        return self.content
-
-    class Meta:
-        verbose_name_plural = "아우터 질문"
-
-
-class Onepiece_comment(core_models.TimeStampedModel):
-    onepiece = models.ForeignKey(
-        Onepieces, related_name="onepiece_comments", on_delete=models.CASCADE
-    )
-    content = models.TextField()
-    Author = models.ForeignKey(
-        "users.User", related_name="onepiece_comments", on_delete=models.CASCADE
-    )
-
-    def __str__(self):
-        return self.content
-
-    class Meta:
-        verbose_name_plural = "원피스 질문"
+        return self.name

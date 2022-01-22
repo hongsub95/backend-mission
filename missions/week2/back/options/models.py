@@ -14,30 +14,12 @@ class Color(core_models.TimeStampedModel):
         return self.color
 
 
-class size(core_models.TimeStampedModel):
+class Size(core_models.TimeStampedModel):
 
     size = models.CharField(max_length=10)
 
     class Meta:
-        abstract = True
+        verbose_name_plural = "사이즈"
 
     def __str__(self):
         return self.size
-
-
-class size_upper(size):
-    class Meta:
-        verbose_name_plural = "사이즈(상의)"
-        verbose_name = "사이즈"
-
-
-class size_outer(size):
-    class Meta:
-        verbose_name_plural = "사이즈(아우터)"
-        verbose_name = "사이즈"
-
-
-class size_onepiece(size):
-    class Meta:
-        verbose_name_plural = "사이즈(원피스)"
-        verbose_name = "사이즈"

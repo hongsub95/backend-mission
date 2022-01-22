@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.0.13 | MIT License | https://tailwindcss.com
+! tailwindcss v3.0.15 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -518,6 +518,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: auto;
 }
 
+.t--mx-36 {
+  margin-left: -9rem;
+  margin-right: -9rem;
+}
+
 .t-my-10 {
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
@@ -531,6 +536,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .t-mx-4 {
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.t-mb-10 {
+  margin-bottom: 2.5rem;
 }
 
 .t-mb-2 {
@@ -553,12 +562,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 1px;
 }
 
-.t-w-full {
-  width: 100%;
-}
-
 .t-w-1\/3 {
   width: 33.333333%;
+}
+
+.t-w-full {
+  width: 100%;
 }
 
 .t-max-w-full {
@@ -569,8 +578,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   flex-direction: column;
 }
 
+.t-flex-wrap {
+  flex-wrap: wrap;
+}
+
 .t-items-center {
   align-items: center;
+}
+
+.t-justify-center {
+  justify-content: center;
 }
 
 .t-justify-between {
@@ -654,9 +671,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-align: center;
 }
 
-.t-text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+.t-text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .t-text-base {

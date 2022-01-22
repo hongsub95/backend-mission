@@ -8,7 +8,7 @@ class ColorAdmin(admin.ModelAdmin):
     ordering = ["color"]
 
 
-@admin.register(models.size_upper, models.size_outer, models.size_onepiece)
+@admin.register(models.Size)
 class SizeAdmin(admin.ModelAdmin):
     field = "size"
     ordering = ["size"]
