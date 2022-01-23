@@ -538,6 +538,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 1rem;
 }
 
+.t-mt-24 {
+  margin-top: 6rem;
+}
+
 .t-mb-10 {
   margin-bottom: 2.5rem;
 }
@@ -606,18 +610,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-bottom-width: 1px;
 }
 
-.t-border-t {
-  border-top-width: 1px;
-}
-
 .t-border-gray-500 {
   --tw-border-opacity: 1;
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
-}
-
-.t-border-gray-800 {
-  --tw-border-opacity: 1;
-  border-color: rgb(31 41 55 / var(--tw-border-opacity));
 }
 
 .t-border-gray-400 {
@@ -659,21 +654,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 1.25rem;
 }
 
-.t-pt-10 {
-  padding-top: 2.5rem;
-}
-
 .t-pb-10 {
   padding-bottom: 2.5rem;
 }
 
 .t-text-center {
   text-align: center;
-}
-
-.t-text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 
 .t-text-base {
@@ -695,22 +681,17 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-weight: 300;
 }
 
-.t-font-medium {
-  font-weight: 500;
-}
-
 .t-font-bold {
   font-weight: 700;
+}
+
+.t-font-medium {
+  font-weight: 500;
 }
 
 .t-text-gray-900 {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
-.t-text-gray-700 {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
 .t-text-red-300 {

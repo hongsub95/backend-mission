@@ -10,8 +10,8 @@
         <link rel="stylesheet" href='{% static 'tailwind.output.css' %}'>
         <link rel="stylesheet" href='{% static 'common.css' %}'>
     </head>
-    <body>
-        <header class="t-container t-max-w-full t-inset-0 t-flex t-items-center t-justify-between t-px-3 t-h-20 t-border-b t-border-gray-500 t-fixed t-bg-white">
+    <body class = "t-text-gray-900 t-mt-24 t-font-light">
+        <header class="t-container t-max-w-full t-inset-0 t-flex t-items-center t-justify-between t-px-3 t-h-20 t-border-b t-border-gray-500 t-fixed">
             {% include "partials/nav.html" %}
             {% block search-bar %}
                 <form method="get" action='{% url 'clothes:search' %}' class="w-9/12">
@@ -20,7 +20,8 @@
             {% endblock search-bar %}
         </header>
         
-        {% block content %}{% endblock content %}
+        {% block content %}
+        {% endblock content %}
 
     </body>
 </html>

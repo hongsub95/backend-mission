@@ -12,7 +12,7 @@ class List(core_models.TimeStampedModel):
 class ListItem(core_models.TimeStampedModel):
     clothes = models.ManyToManyField(
         "clothes.Clothes",
-        verbose_name="상의",
+        verbose_name="상품",
         related_name="list",
         blank=True,
     )

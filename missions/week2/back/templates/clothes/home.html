@@ -5,9 +5,9 @@
 {% endblock page_name %}
 {% block content %}
     <div class = "t-container t-mx-auto t-pb-10">
-        <div class="t-flex t-items-center t-justify-center t-mx-auto container">
+        <div class="t-flex t-flex-wrap t-mb-10">
             {% for clothes in clothes_set %}
-                <a href = "clothes/int:{{clothes.pk}}/">
+                <a href = "clothes/int:{{clothes.pk}}/" class = "t-w-1/4 t-mb-10 t-px-2 t-overflow-hidden">
                     <h3>{{clothes}}</h3>
                 </a>
             {% endfor %}

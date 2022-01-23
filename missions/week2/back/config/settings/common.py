@@ -49,6 +49,7 @@ PROJECT_APPS = [
     "clothes.apps.ClothesConfig",
     "markets.apps.MarketsConfig",
     "options.apps.OptionsConfig",
+    "lists.apps.ListsConfig",
 ]
 
 THIRD_APPS = [

@@ -5,7 +5,7 @@ app_name = "clothes"
 
 urlpatterns = [
     path("", views.all_clothes, name="all_clothes"),
-    path("list/", views.clothes_list, name="clothes_list"),
+    path("clothes_list/", views.clothes_list, name="clothes_list"),
     path("int:<pk>/", views.clothes_detail.as_view(), name="clothes_detail"),
     path("search/", views.clothes_list, name="search"),
 ]
