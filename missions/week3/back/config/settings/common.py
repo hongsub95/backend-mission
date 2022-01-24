@@ -54,6 +54,7 @@ PROJECT_APPS = [
 
 THIRD_APPS = [
     "bootstrap5",
+    "rest_framework",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_APPS
