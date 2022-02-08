@@ -1,6 +1,7 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 from . import views
 
 app_name = "clothes_api"
-
-urlpatterns = [path("", views.ListClothesView.as_view(), name="clothes_api_list")]
+router=DefaultRouter()
+router.register('',views.ClothesViewset)
+urlpatterns = router.urls

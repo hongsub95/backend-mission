@@ -1,3 +1,8 @@
-{
-    "python.formatting.provider": "black"
+{   
+    "python.pythonPath" : "C:/Users/신홍섭/AppData/Local/Programs/Python/Python39/python.exe",
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.enabled": true,
+    "python.formatting.provider": "black",
+    "python.linting.flake8Args": ["--max-line-length=91"]
 }
