@@ -41,12 +41,16 @@ class Clothes(core_models.TimeStampedModel):
         related_name="clothes",
         on_delete=models.DO_NOTHING,
         verbose_name="카테고리",
+        null=True,
+        blank=True,
     )
     market = models.ForeignKey(
         "markets.Market",
         related_name="clothes",
         on_delete=models.CASCADE,
         verbose_name="사이트",
+        null=True,
+        blank=True,
     )
     host = models.ForeignKey(
         "users.User",
