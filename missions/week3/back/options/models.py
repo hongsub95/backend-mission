@@ -11,7 +11,7 @@ class Color(core_models.TimeStampedModel):
         verbose_name = "색상"
 
     def __str__(self):
-        return f"{self.color}"
+        return self.color
 
 
 class Size(core_models.TimeStampedModel):
@@ -22,4 +22,4 @@ class Size(core_models.TimeStampedModel):
         verbose_name_plural = "사이즈"
 
     def __str__(self):
-        return f"{self.size}"
+        return self.size

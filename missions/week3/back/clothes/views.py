@@ -1,15 +1,16 @@
 from re import template
-from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage
-from django.views.generic import DetailView
+from django.views.generic import DetailView, FormView
 import random
-from . import models
+from django.db.models import Q 
+from . import models as clothes_models
+from .forms import SearchForm
 
 
 def all_clothes(request):
     clothes_set = set()
-    clothes = models.Clothes.objects.all()
+    clothes = clothes_models.Clothes.objects.all()
     len_clothes = len(clothes)
     if len_clothes <= 10:
         clothes_set.update(clothes)
@@ -37,7 +38,7 @@ def all_clothes(request):
 
 def clothes_list(request):
     page = request.GET.get("page", 1)
-    clothes_list = models.Clothes.objects.all()
+    clothes_list = clothes_models.Clothes.objects.all()
     paginator = Paginator(clothes_list, 10)
     try:
         clothes = paginator.get_page(page)
@@ -51,15 +52,16 @@ def clothes_list(request):
 
 
 class clothes_detail(DetailView):
-    model = models.Clothes
+    model = clothes_models.Clothes
 
 
-def search(request):
-    clothes_list = models.Clothes.objects.all()
-    search = request.GET.get("search", "")
-    if search:
-        search_list = clothes_list.filter(
-            Q(name__icontains=search) | Q(market__icontains=search)
-        )
-    paginator = Paginator(search_list, 10)
-    return render(request, "clothes/search.html", {"search": search})
+class SearchView(FormView):
+    template_name = "clothes/search.html"
+    form_class = SearchForm
+    
+    def form_valid(self,form):
+        name = form.cleaned_data.get("name")
+        clothes_list = clothes_models.Clothes.objects.filter(Q(name__icontains=name) | Q(description__icontains=name)).distinct()
+        return render(self.request,self.template_name,{'form':form,'clothes_list':clothes_list,'name':name})
+                  
+            

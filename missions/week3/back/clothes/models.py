@@ -63,7 +63,7 @@ class Clothes(core_models.TimeStampedModel):
         verbose_name_plural = "상품"
 
     def __str__(self):
-        return self.name
+        return self.name 
 
     def get_absolute_url(self):
         return reverse("clothes:clothes_detail", kwargs={"pk": self.pk})

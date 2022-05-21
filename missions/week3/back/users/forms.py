@@ -23,19 +23,19 @@ class LoginForm(forms.Form):
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = models.User
-        fields = ("first_name", "last_name", "email")
+        fields = ("first_name", "email")
 
         widgets = {
-            "first_name": forms.TextInput(attrs={"placeholder": "First Name"}),
-            "last_name": forms.TextInput(attrs={"placeholder": "Last Name"}),
-            "email": forms.EmailInput(attrs={"placeholder": "Email Name"}),
+            "first_name": forms.TextInput(attrs={"placeholder": "이름"}),
+            
+            "email": forms.EmailInput(attrs={"placeholder": "아이디"}),
         }
 
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder": "Password"})
+        widget=forms.PasswordInput(attrs={"placeholder": "패스워드"}),label="패스워드"
     )
     password1 = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password"})
+        widget=forms.PasswordInput(attrs={"placeholder": "패스워드 재확인"}),label="2차 패스워드"
     )
 
     def clean_email(self):

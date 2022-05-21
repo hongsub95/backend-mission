@@ -7,25 +7,19 @@
 {% block search-bar %}{% endblock search-bar %}
 
 {% block content %}
-    <h2>검색!</h2>
-    <form method="GET" action="{% url 'search' %}">
-        <div>
-        {% if search.has_previous %}
-            <a href="?page={{search.previous_page_number}}">이전</a> 
-        {% endif %}
-            
-        Page {{search.number}} / {{search.paginator.num_pages}}
-            
-        {% if search.has_next %}
-            <a href ="?page={{search.next_page_number}}">다음</a>
-        {% endif %}
-        </div>
-      
-        <div id="search">
-          <input name="search" type="text">
-          <button class="btn btn-primary" type="submit">검색</button>
-        </div>
-        </form>
+    <form method="post" action="{% url 'clothes:search' %}">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit">
+    </form>
+    
+    {% if clothes_list %}
+        {% for clothe in clothes_list %}
+            {{clothe.name}}
+        {% endfor %}
+    {% elif name %}
+        <span>검색 결과 찾으시는 옷이 없습니다.</span>
+    {% endif %}
 {% endblock content %}
 
 

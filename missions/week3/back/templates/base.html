@@ -14,9 +14,9 @@
         <header class="t-container t-max-w-full t-inset-0 t-flex t-items-center t-justify-between t-px-3 t-h-20 t-border-b t-border-gray-500 t-fixed">
             {% include "partials/nav.html" %}
             {% block search-bar %}
-                <form method="get" action='{% url 'clothes:search' %}' class="w-9/12">
-                    <button>원하는 옷 검색</button>
-                </form>
+                <a href="{% url 'clothes:search' %}" >
+                    원하는 옷 검색
+                </a>
             {% endblock search-bar %}
         </header>
         
